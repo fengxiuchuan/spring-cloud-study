@@ -1,0 +1,23 @@
+server:
+  port: 21000
+
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml
+
+spring:
+  application:
+    name: eureka-client
+
+
+# eureka服务注册中心配置
+eureka:
+  client:
+    service-url: {"defaultZone":"http://localhost:11000/eureka/"}
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
