@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/fengxiuchuan/spring-config-repo.git/
+          username: fengxiuchuan91@163.com
+          password: Fengxc@0113
+server:
+  port: 2006
+

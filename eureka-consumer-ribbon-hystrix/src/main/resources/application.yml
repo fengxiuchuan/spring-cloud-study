@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eureka-consumer-ribbon-hystix
+server:
+  port: 2205
+
+# eureka服务注册中心配置
+eureka:
+  client:
+    service-url: {"defaultZone":"http://localhost:11000/eureka/"}

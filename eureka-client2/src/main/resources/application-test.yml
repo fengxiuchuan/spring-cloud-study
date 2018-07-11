@@ -1,5 +1,5 @@
 server:
-  port: 2101
+  port: 21000
 
 # 日志配置
 logging:
@@ -8,7 +8,6 @@ logging:
 spring:
   application:
     name: eureka-client
-
 
 # eureka服务注册中心配置
 eureka:
