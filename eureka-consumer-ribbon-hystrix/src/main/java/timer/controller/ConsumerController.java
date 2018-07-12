@@ -32,6 +32,7 @@ public class ConsumerController {
         @Autowired
         private RestTemplate restTemplate;
 
+        //使用 HystrixCommand 服务降级
         @HystrixCommand(fallbackMethod = "fallback")
         public String consumer(){
             return restTemplate.getForObject("http://eureka-client/hello",String.class);

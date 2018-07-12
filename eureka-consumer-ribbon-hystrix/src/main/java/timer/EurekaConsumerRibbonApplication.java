@@ -2,6 +2,7 @@ package timer;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -18,9 +19,11 @@ import org.springframework.web.client.RestTemplate;
  * @date: 2018/7/11 14:43
  */
 //使用@EnableCircuitBreaker 或者 @EnableHystrix 开启Hystrix的使用：
-@EnableCircuitBreaker
+/*@EnableCircuitBreaker
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication*/
+//可以使用SpringCloudApplication注解，里面包含SpringBootApplication  EnableDiscoveryClient  EnableCircuitBreaker
+@SpringCloudApplication
 public class EurekaConsumerRibbonApplication {
 
 	@Bean
