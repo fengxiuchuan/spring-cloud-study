@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SystemUserMapper" >
+  <resultMap id="BaseResultMap" type="com.project.phoneBack.entity.SystemUser" >
+    <id column="TEAM_USER_ID" property="teamUserId" jdbcType="INTEGER" />
+    <result column="USER_ACCOUNT" property="userAccount" jdbcType="VARCHAR" />
+    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="INTEGER" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TEAM_USER_ID, USER_ACCOUNT, USER_PWD, CREATE_TIME, CREATE_USER_ID, EMAIL, PHONE,USER_TYPE
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bs_system_user
+    where TEAM_USER_ID = #{teamUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bs_system_user
+    where TEAM_USER_ID = #{teamUserId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.phoneBack.entity.SystemUser" >
+    insert into bs_system_user (TEAM_USER_ID, USER_ACCOUNT, USER_PWD, 
+      CREATE_TIME, CREATE_USER_ID, EMAIL, 
+      PHONE,USER_TYPE)
+    values (#{teamUserId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR},#{userType,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.phoneBack.entity.SystemUser" >
+    update bs_system_user
+    <set >
+      <if test="userAccount != null" >
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+       USER_TYPE = #{userType,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where TEAM_USER_ID = #{teamUserId,jdbcType=INTEGER}
+  </update>
+  <!--  -->
+  <select id="getSystemUser" resultMap="BaseResultMap" parameterType="map" >
+  SELECT * FROM bs_system_user WHERE USER_ACCOUNT =#{userAccount,jdbcType=VARCHAR}  AND USER_PWD=#{userPwd,jdbcType=VARCHAR}
+  </select>
+</mapper>

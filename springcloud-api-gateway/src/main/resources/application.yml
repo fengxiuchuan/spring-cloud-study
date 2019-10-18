@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+
+server:
+  port: 11009
+

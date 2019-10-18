@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ActTradeMapper" >
+  <resultMap id="BaseResultMap" type="com.project.phoneBack.entity.ActTrade" >
+    <id column="trade_id" property="tradeId" jdbcType="INTEGER" />
+    <result column="act_id" property="actId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="notify_time" property="notifyTime" jdbcType="VARCHAR" />
+    <result column="notify_type" property="notifyType" jdbcType="VARCHAR" />
+    <result column="notify_id" property="notifyId" jdbcType="VARCHAR" />
+    <result column="sign_type" property="signType" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="payment_type" property="paymentType" jdbcType="VARCHAR" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="trade_status" property="tradeStatus" jdbcType="VARCHAR" />
+    <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
+    <result column="seller_mail" property="sellerMail" jdbcType="VARCHAR" />
+    <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
+    <result column="buyer_mail" property="buyerMail" jdbcType="VARCHAR" />
+    <result column="total_fee" property="totalFee" jdbcType="DOUBLE" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="body" property="body" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="VARCHAR" />
+    <result column="gmt_payment" property="gmtPayment" jdbcType="VARCHAR" />
+    <result column="is_total_fee_adjust" property="isTotalFeeAdjust" jdbcType="VARCHAR" />
+    <result column="user_coupon" property="userCoupon" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="VARCHAR" />
+    <result column="refund_status" property="refundStatus" jdbcType="VARCHAR" />
+    <result column="gmt_refund" property="gmtRefund" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_TIME" property="lastUpdatedTime" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="remark_name" property="remarkName" jdbcType="VARCHAR" />
+    <result column="remark_mobile" property="remarkMobile" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    trade_id, act_id, user_id, notify_time, notify_type, notify_id, sign_type, sign, 
+    out_trade_no, subject, payment_type, trade_no, trade_status, seller_id, seller_mail, 
+    buyer_id, buyer_mail, total_fee, quantity, price, body, gmt_create, gmt_payment, 
+    is_total_fee_adjust, user_coupon, discount, refund_status, gmt_refund,CREATED_BY,
+    CREATED_TIME,LAST_UPDATED_BY,LAST_UPDATED_TIME,version,remark_name,remark_mobile
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hg_trade
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_hg_trade
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.project.phoneBack.entity.ActTrade" >
+    insert into t_hg_trade (trade_id, act_id, user_id, 
+      notify_time, notify_type, notify_id, 
+      sign_type, sign, out_trade_no, 
+      subject, payment_type, trade_no, 
+      trade_status, seller_id, seller_mail, 
+      buyer_id, buyer_mail, total_fee, 
+      quantity, price, body, 
+      gmt_create, gmt_payment, is_total_fee_adjust, 
+      user_coupon, discount, refund_status, 
+      gmt_refund,CREATED_BY,CREATED_TIME,LAST_UPDATED_BY,LAST_UPDATED_TIME,version,remark_name,remark_mobile)
+    values (#{tradeId,jdbcType=INTEGER}, #{actId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{notifyTime,jdbcType=VARCHAR}, #{notifyType,jdbcType=VARCHAR}, #{notifyId,jdbcType=VARCHAR}, 
+      #{signType,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{paymentType,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{tradeStatus,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, #{sellerMail,jdbcType=VARCHAR}, 
+      #{buyerId,jdbcType=VARCHAR}, #{buyerMail,jdbcType=VARCHAR}, #{totalFee,jdbcType=DOUBLE}, 
+      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{body,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=VARCHAR}, #{gmtPayment,jdbcType=VARCHAR}, #{isTotalFeeAdjust,jdbcType=VARCHAR}, 
+      #{userCoupon,jdbcType=VARCHAR}, #{discount,jdbcType=VARCHAR}, #{refundStatus,jdbcType=VARCHAR}, 
+      #{gmtRefund,jdbcType=VARCHAR},#{createdBy,jdbcType=VARCHAR},#{createdTime,jdbcType=VARCHAR}
+      ,#{lastUpdatedBy,jdbcType=VARCHAR},#{lastUpdatedTime,jdbcType=VARCHAR},#{version,jdbcType=INTEGER},
+      #{remarkName,jdbcType=VARCHAR},#{remarkMobile,jdbcType=VARCHAR})
+  </insert>
+  <select id="findTradListByTradeNo" resultMap="BaseResultMap" parameterType="map">
+  SELECT  <include refid="Base_Column_List" /> FROM t_hg_trade WHERE out_trade_no=#{outTradeNo,jdbcType=VARCHAR}
+  </select>
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.phoneBack.entity.ActTrade" >
+    update t_hg_trade
+    <set >
+      <if test="actId != null" >
+        act_id = #{actId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="notifyTime != null" >
+        notify_time = #{notifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyType != null" >
+        notify_type = #{notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyId != null" >
+        notify_id = #{notifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null" >
+        sign_type = #{signType,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null" >
+        payment_type = #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeStatus != null" >
+        trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerMail != null" >
+        seller_mail = #{sellerMail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null" >
+        buyer_id = #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerMail != null" >
+        buyer_mail = #{buyerMail,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtPayment != null" >
+        gmt_payment = #{gmtPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="isTotalFeeAdjust != null" >
+        is_total_fee_adjust = #{isTotalFeeAdjust,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoupon != null" >
+        user_coupon = #{userCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null" >
+        refund_status = #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        gmt_refund = #{gmtRefund,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="refundStatus != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="refundStatus != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        LAST_UPDATED_TIME = #{lastUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkMobile != null" >
+        remark_mobile = #{remarkMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkName != null" >
+        remark_name = #{remarkName,jdbcType=VARCHAR},
+      </if>
+       version=version+1
+    </set>
+    where trade_id = #{tradeId,jdbcType=INTEGER}
+    and version= #{version,jdbcType=INTEGER} 
+  </update>
+  
+  <update id="updateByOutTradeNo" parameterType="com.project.phoneBack.entity.ActTrade" >
+    update t_hg_trade
+    <set >
+      <if test="actId != null" >
+        act_id = #{actId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="notifyTime != null" >
+        notify_time = #{notifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyType != null" >
+        notify_type = #{notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyId != null" >
+        notify_id = #{notifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null" >
+        sign_type = #{signType,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null" >
+        payment_type = #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeStatus != null" >
+        trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerMail != null" >
+        seller_mail = #{sellerMail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null" >
+        buyer_id = #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerMail != null" >
+        buyer_mail = #{buyerMail,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtPayment != null" >
+        gmt_payment = #{gmtPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="isTotalFeeAdjust != null" >
+        is_total_fee_adjust = #{isTotalFeeAdjust,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoupon != null" >
+        user_coupon = #{userCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null" >
+        refund_status = #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        gmt_refund = #{gmtRefund,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="refundStatus != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="refundStatus != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        LAST_UPDATED_TIME = #{lastUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkMobile != null" >
+        remark_mobile = #{remarkMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkName != null" >
+        remark_name = #{remarkName,jdbcType=VARCHAR},
+      </if>
+       version=version+1
+    </set>
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+    and version= #{version,jdbcType=INTEGER} 
+  </update>
+</mapper>

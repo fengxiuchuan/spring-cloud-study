@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+eureka:
+  client:
+    service-url: {"defaultZone":"http://localhost:11000/eureka/"}
+server:
+  port: 1107
+
+zuul:
+  routes:
+#  single-instance
+#   api-a:
+#     path: /eureka-client/**
+#     url: http://localhost:2203/
+#  multi-instance
+    api-b:
+      path: /eureka-client2/**
+      serviceId: eureka-client2
+ribbon.eureka.enabled=false
+eureka-client2:
+  ribbon:
+    listOfServers: http://localhost:2102/, http://localhost:2103/,http://localhost:2101/

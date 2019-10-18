@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TradeSeqMapper" >
+  <resultMap id="BaseResultMap" type="com.project.phoneBack.entity.TradeSeq" >
+    <id column="SEQ_ID" property="seqId" jdbcType="VARCHAR" />
+    <result column="ACT_ID" property="actId" jdbcType="BIGINT" />
+    <result column="OUT_TRADE_NO" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="TRADE_STATUS" property="tradeStatus" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="BIT" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.project.phoneBack.entity.TradeSeq" extends="BaseResultMap" >
+    <result column="MEMO" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    SEQ_ID, ACT_ID, OUT_TRADE_NO, TRADE_STATUS, ENABLE, CREATED_BY, CREATED_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    MEMO
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_hg_act_trade_seq
+    where SEQ_ID = #{seqId,jdbcType=VARCHAR}
+  </select>
+  <!-- 根据seqId和outTradeNo查找 -->
+  <select id="queryTradeByOutTradeNo" resultMap="ResultMapWithBLOBs" parameterType="map">
+  SELECT 
+   <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" /> 
+    FROM t_hg_act_trade_seq  
+    WHERE `SEQ_ID`= #{seqId,jdbcType=VARCHAR}
+      AND `OUT_TRADE_NO`=#{outTradeNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_hg_act_trade_seq
+    where SEQ_ID = #{seqId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.project.phoneBack.entity.TradeSeq" useGeneratedKeys="true" keyProperty="seqId">
+    insert into t_hg_act_trade_seq (SEQ_ID, ACT_ID, OUT_TRADE_NO, 
+      TRADE_STATUS, ENABLE, CREATED_BY, 
+      CREATED_TIME, MEMO)
+    values (#{seqId,jdbcType=VARCHAR}, #{actId,jdbcType=BIGINT}, #{outTradeNo,jdbcType=VARCHAR}, 
+      #{tradeStatus,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=VARCHAR}, #{memo,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.phoneBack.entity.TradeSeq" >
+    update t_hg_act_trade_seq
+    <set >
+      <if test="actId != null" >
+        ACT_ID = #{actId,jdbcType=BIGINT},
+      </if>
+      <if test="outTradeNo != null" >
+        OUT_TRADE_NO = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeStatus != null" >
+        TRADE_STATUS = #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=BIT},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where SEQ_ID = #{seqId,jdbcType=VARCHAR}
+  </update>
+</mapper>

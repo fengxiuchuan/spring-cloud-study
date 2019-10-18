@@ -14,7 +14,8 @@ spring:
 eureka:
   client:
     service-url: {"defaultZone":"http://localhost:11000/eureka/"}
-
+    register-with-eureka: false
+    fetch-registry: false
 feign:
   client:
     config:

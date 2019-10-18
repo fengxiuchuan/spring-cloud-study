@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.project.phoneBack.entity.Activity" >
+    <id column="ACT_ID" property="actId" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SUB_TITLE" property="subTitle" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="SMALLINT" />
+    <result column="BTIME" property="btime" jdbcType="VARCHAR" />
+    <result column="ETIME" property="etime" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="CUR_PRICE" property="curPrice" jdbcType="VARCHAR" />
+    <result column="MAX_JOIN_USER" property="maxJoinUser" jdbcType="INTEGER" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="END_ORDER_TIME" property="endOrderTime" jdbcType="VARCHAR" />
+    <result column="PUB_TIME" property="pubTime" jdbcType="VARCHAR" />
+    <result column="PUB_USER_ID" property="pubUserId" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="TINYINT" />
+    <result column="AreaID" property="areaid" jdbcType="INTEGER" />
+    <result column="COVER_URL" property="coverUrl" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_TIME" property="lastUpdatedTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.project.phoneBack.entity.ActivityWithBLOBs" extends="BaseResultMap" >
+    <result column="JOURNEY" property="journey" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+    <result column="JOURNEY_TEXT" property="journeyText" jdbcType="LONGVARCHAR" />
+    <result column="CONTNET_TEXT" property="contentText" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT_URL" property="contentUrl" jdbcType="LONGVARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+<resultMap id="BasePagerMap2" type="com.project.phoneBack.entity.ActivityDetailVO"  >
+    <id column="ACT_ID" property="actId" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SUB_TITLE" property="subTitle" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="SMALLINT" />
+    <result column="BTIME" property="btime" jdbcType="VARCHAR" />
+    <result column="ETIME" property="etime" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="CUR_PRICE" property="curPrice" jdbcType="VARCHAR" />
+    <result column="MAX_JOIN_USER" property="maxJoinUser" jdbcType="INTEGER" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="END_ORDER_TIME" property="endOrderTime" jdbcType="VARCHAR" />
+    <result column="PUB_TIME" property="pubTime" jdbcType="VARCHAR" />
+    <result column="PUB_USER_ID" property="pubUserId" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="TINYINT" />
+    <result column="AreaID" property="areaid" jdbcType="INTEGER" />
+    <result column="COVER_URL" property="coverUrl" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_TIME" property="lastUpdatedTime" jdbcType="VARCHAR" />
+    <result column="JOURNEY" property="journey" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT_URL" property="contentUrl" jdbcType="LONGVARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="LONGVARCHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR"/>
+  </resultMap>
+<resultMap id="BasePagerMap" type="com.project.phoneBack.entity.ActivityForm"  >
+    <id column="ACT_ID" property="actId" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SUB_TITLE" property="subTitle" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="SMALLINT" />
+    <result column="BTIME" property="btime" jdbcType="VARCHAR" />
+    <result column="ETIME" property="etime" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="CUR_PRICE" property="curPrice" jdbcType="VARCHAR" />
+    <result column="MAX_JOIN_USER" property="maxJoinUser" jdbcType="INTEGER" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="END_ORDER_TIME" property="endOrderTime" jdbcType="VARCHAR" />
+    <result column="PUB_TIME" property="pubTime" jdbcType="VARCHAR" />
+    <result column="PUB_USER_ID" property="pubUserId" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="VARCHAR" />
+    <result column="AreaID" property="areaid" jdbcType="INTEGER" />
+    <result column="COVER_URL" property="coverUrl" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_TIME" property="lastUpdatedTime" jdbcType="VARCHAR" />
+    <result column="JOURNEY" property="journey" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+    <result column="CONTENT_URL" property="contentUrl" jdbcType="LONGVARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="LONGVARCHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ACT_ID, TITLE, SUB_TITLE, TYPE, BTIME,   ETIME, PRICE, CUR_PRICE, MAX_JOIN_USER, ADDRESS, 
+    END_ORDER_TIME, PUB_TIME, PUB_USER_ID, ENABLE, AreaID, COVER_URL, CREATED_BY,  CREATED_TIME, 
+    LAST_UPDATED_BY,LAST_UPDATED_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    JOURNEY, CONTENT, CONTENT_URL, MEMO,JOURNEY_TEXT,CONTNET_TEXT
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_hg_activity
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </select>
+    <select id="selectByPrimaryKey2" resultMap="BasePagerMap2" parameterType="map" >
+   SELECT 
+              <include refid="Base_Column_List" />
+               ,
+              <include refid="Blob_Column_List" />
+              ,
+              bcity.`City`
+              
+              FROM t_hg_activity act
+              LEFT JOIN t_hg_basic_city bcity
+              ON act.`AreaID` = bcity.`City_ID`
+    where act.ACT_ID = #{actId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_hg_activity
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.project.phoneBack.entity.ActivityWithBLOBs" useGeneratedKeys="true" keyProperty="actId" >
+    insert into t_hg_activity (ACT_ID, TITLE, SUB_TITLE, 
+      TYPE, BTIME, ETIME, 
+      PRICE, CUR_PRICE, MAX_JOIN_USER, 
+      ADDRESS, END_ORDER_TIME, PUB_TIME, 
+      PUB_USER_ID, ENABLE, AreaID, 
+      COVER_URL, CREATED_BY, CREATED_TIME, 
+      LAST_UPDATED_BY, LAST_UPDATED_TIME, JOURNEY, 
+      CONTENT, CONTENT_URL, MEMO,JOURNEY_TEXT,CONTNET_TEXT
+      )
+    values (#{actId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, 
+      #{type,jdbcType=SMALLINT}, #{btime,jdbcType=VARCHAR}, #{etime,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{curPrice,jdbcType=VARCHAR}, #{maxJoinUser,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{endOrderTime,jdbcType=VARCHAR}, #{pubTime,jdbcType=VARCHAR}, 
+      #{pubUserId,jdbcType=VARCHAR}, #{enable,jdbcType=VARCHAR}, #{areaid,jdbcType=INTEGER}, 
+      #{coverUrl,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedTime,jdbcType=VARCHAR}, #{journey,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{contentUrl,jdbcType=LONGVARCHAR}, #{memo,jdbcType=LONGVARCHAR},
+      #{journeyText,jdbcType=LONGVARCHAR},#{contentText,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.phoneBack.entity.ActivityWithBLOBs" >
+    update t_hg_activity
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        SUB_TITLE = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="btime != null" >
+        BTIME = #{btime,jdbcType=VARCHAR},
+      </if>
+      <if test="etime != null" >
+        ETIME = #{etime,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="curPrice != null" >
+        CUR_PRICE = #{curPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="maxJoinUser != null" >
+        MAX_JOIN_USER = #{maxJoinUser,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="endOrderTime != null" >
+        END_ORDER_TIME = #{endOrderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTime != null" >
+        PUB_TIME = #{pubTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pubUserId != null" >
+        PUB_USER_ID = #{pubUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=TINYINT},
+      </if>
+      <if test="areaid != null" >
+        AreaID = #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="coverUrl != null" >
+        COVER_URL = #{coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        LAST_UPDATED_TIME = #{lastUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="journey != null" >
+        JOURNEY = #{journey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contentUrl != null" >
+        CONTENT_URL = #{contentUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="contentText != null" >
+        CONTNET_TEXT = #{contentText,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="journeyText != null" >
+        JOURNEY_TEXT = #{journeyText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </update>
+  
+        <!--分页查询,获取总记录条数 -->
+    <select id="getActivityTotalCount" resultType="int" parameterType="map">  
+       select count(sub.ACT_ID) from  
+            ( SELECT act.ACT_ID FROM t_hg_activity act
+            where 1=1 
+            <!-- 标题 -->
+            <if test="title != null and title != ''">
+				and  act.TITLE LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
+			</if>
+			<!-- 分类 -->
+			<if test="type != null and type != ''">
+				and act.TYPE  =#{type,jdbcType=SMALLINT}
+			</if>
+                ) as sub  
+    </select> 
+    <!-- 对查询得到的数据进行分页 -->
+    <select id="getActivityByPager" resultMap="BasePagerMap" parameterType="map">  
+        select  sub.* 
+            from (
+             select  sub.* 
+            from (
+             SELECT 
+    act.ACT_ID,
+    act.TITLE,
+    act.SUB_TITLE,
+    act.TYPE,
+    act.BTIME,
+    act.ETIME,
+    act.PRICE,
+    act.CUR_PRICE,
+    act.MAX_JOIN_USER,
+   act.ADDRESS,
+   act.END_ORDER_TIME,
+    act.PUB_TIME,
+    act.PUB_USER_ID,
+    act.ENABLE,
+    act.AreaID,
+    act.COVER_URL,
+    act.CREATED_BY,
+    act.CREATED_TIME,
+    act.LAST_UPDATED_BY,
+    act.LAST_UPDATED_TIME,
+    act.JOURNEY,
+    act.CONTENT,
+    act.CONTENT_URL,
+    act.MEMO,
+    act.JOURNEY_TEXT,
+    act.CONTNET_TEXT,
+    bcity.`City`,
+    ud.`NAME` 
+  FROM
+    t_hg_activity act 
+    LEFT JOIN t_hg_basic_city bcity 
+      ON act.`AreaID` = bcity.`City_ID` 
+    LEFT JOIN t_hg_user_detail ud 
+      ON ud.`USER_ID` = act.`PUB_USER_ID` 
+  WHERE 1 = 1 
+            <!-- 标题 -->
+            <if test="title != null and title != ''">
+				and  act.TITLE LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
+			</if>
+			<!-- 分类 -->
+			<if test="type != null and type != ''">
+				and act.TYPE  =#{type,jdbcType=SMALLINT}
+			</if>
+            ORDER BY act.act_id desc ) AS sub
+           <if test="startIndex != null and pageSize != null">
+           limit #{startIndex} , #{pageSize} 
+           </if>
+    </select> 
+    
+    
+       <!--分页查询,获取总记录条数 -->
+    <select id="getActSumTotalCount" resultType="int" parameterType="map">  
+       select count(sub.ACT_ID) from  
+            (SELECT tbl.ACT_ID ACT_ID
+				 FROM(
+				SELECT '收藏' cs_type,COUNT(a_fav.`FAV_ID`) num,a_fav.`ACT_ID`  
+				FROM t_hg_user_act_favor a_fav
+				GROUP BY a_fav.`ACT_ID`
+				UNION ALL
+				/*报名人数*/
+				SELECT '人数' cs_type,COUNT(act_ord.`ORD_ID`) num,act_ord.`ACT_ID` FROM t_hg_act_order act_ord
+				GROUP BY act_ord.`ACT_ID`
+				UNION ALL
+				/*问题数*/
+				SELECT '问题' cs_type,COUNT(act_ask.ASK_ID) num,act_ask.ACT_ID FROM t_hg_act_ask act_ask 
+				GROUP BY act_ask.ACT_ID
+				UNION ALL
+				/*一星*/
+				SELECT '一星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=1
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*二星*/
+				SELECT '二星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=2
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*三星*/
+				SELECT '三星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=3
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*四星*/
+				SELECT '四星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=4
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*五星*/
+				SELECT '五星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=5
+				GROUP BY act_com.ACT_ID
+				) tbl
+				LEFT JOIN t_hg_activity act ON act.`ACT_ID` = tbl.ACT_ID
+				WHERE 1=1
+            <!-- 标题 -->
+            <if test="title != null and title != ''">
+				and  act.TITLE LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
+			</if>
+			<!-- 分类 -->
+			<if test="type != null and type != ''">
+				and act.TYPE  =#{type,jdbcType=SMALLINT}
+			</if>
+                ) as sub  
+    </select> 
+    <!-- 对查询得到的数据进行分页 -->
+    <select id="getActSumByPager" resultType="map" parameterType="map">  
+        select  sub.* 
+            from (
+             SELECT tbl.ACT_ID,
+				  act.`TITLE`,
+				  act.`SUB_TITLE`,
+				  MAX(CASE WHEN tbl.cs_type='收藏' THEN tbl.num ELSE 0 END ) AS fav_num,
+				  MAX(CASE WHEN tbl.cs_type='人数' THEN tbl.num ELSE 0 END ) AS order_num,
+				  MAX(CASE WHEN tbl.cs_type='问题' THEN tbl.num ELSE 0 END ) AS ask_num,
+				  MAX(CASE WHEN tbl.cs_type='一星' THEN tbl.num ELSE 0 END ) AS ag_num_one,
+				  MAX(CASE WHEN tbl.cs_type='二星' THEN tbl.num ELSE 0 END ) AS ag_num_two,
+				  MAX(CASE WHEN tbl.cs_type='三星' THEN tbl.num ELSE 0 END ) AS ag_num_three,
+				  MAX(CASE WHEN tbl.cs_type='四星' THEN tbl.num ELSE 0 END ) AS ag_num_four,
+				  MAX(CASE WHEN tbl.cs_type='五星' THEN tbl.num ELSE 0 END ) AS ag_num_five
+				 FROM(
+				SELECT '收藏' cs_type,COUNT(a_fav.`FAV_ID`) num,a_fav.`ACT_ID`  
+				FROM t_hg_user_act_favor a_fav
+				GROUP BY a_fav.`ACT_ID`
+				UNION ALL
+				/*报名人数*/
+				SELECT '人数' cs_type,COUNT(act_ord.`ORD_ID`) num,act_ord.`ACT_ID` FROM t_hg_act_order act_ord
+				GROUP BY act_ord.`ACT_ID`
+				UNION ALL
+				/*问题数*/
+				SELECT '问题' cs_type,COUNT(act_ask.ASK_ID) num,act_ask.ACT_ID FROM t_hg_act_ask act_ask 
+				GROUP BY act_ask.ACT_ID
+				UNION ALL
+				/*一星*/
+				SELECT '一星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=1
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*二星*/
+				SELECT '二星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=2
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*三星*/
+				SELECT '三星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=3
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*四星*/
+				SELECT '四星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=4
+				GROUP BY act_com.ACT_ID
+				UNION ALL
+				/*五星*/
+				SELECT '五星' cs_type,COUNT(act_com.COM_ID) num,act_com.ACT_ID FROM `t_hg_act_comment` act_com 
+				WHERE act_com.SCORE=5
+				GROUP BY act_com.ACT_ID
+				) tbl
+				LEFT JOIN t_hg_activity act ON act.`ACT_ID` = tbl.ACT_ID
+				WHERE 1=1
+            <!-- 标题 -->
+            <if test="title != null and title != ''">
+				and  act.TITLE LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
+			</if>
+			<!-- 分类 -->
+			<if test="type != null and type != ''">
+				and act.TYPE  =#{type,jdbcType=SMALLINT}
+			</if>
+            ORDER BY act.act_id desc ) AS sub
+           <if test="startIndex != null and pageSize != null">
+           limit #{startIndex} , #{pageSize} 
+           </if>
+    </select> 
+    <!-- 查找所有活动 -->
+    <select id="selectAllActList" resultType="map">
+	SELECT t.`ACT_ID` AS  actId ,t.`TITLE` AS  title FROM t_hg_activity t WHERE t.`ENABLE`='1'
+    </select>
+    
+    <!-- 查找活动ID -->
+    <select id="selectActPrimaryid" resultType="int">
+     SELECT F_HG_GetActOrReviewID(1)
+    </select>
+    <!-- 查找活动回顾ID -->
+    <select id="selectActReviewPrimaryid" resultType="int">
+     SELECT F_HG_GetActOrReviewID(2)
+    </select>
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.project.phoneBack.entity.UserDetail" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="BIT" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="HEADURL" property="headurl" jdbcType="VARCHAR" />
+    <result column="TIP" property="tip" jdbcType="VARCHAR" />
+    <result column="AreaID" property="areaid" jdbcType="BIGINT" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_TIME" property="lastUpdatedTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, NAME, SEX, EMAIL, NICKNAME, HEADURL, TIP, AreaID, CREATED_BY, CREATED_TIME, 
+    LAST_UPDATED_BY, LAST_UPDATED_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hg_user_detail
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_hg_user_detail
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.project.phoneBack.entity.UserDetail" useGeneratedKeys="true" keyProperty="userId">
+    insert into t_hg_user_detail (USER_ID, NAME, SEX, 
+      EMAIL, NICKNAME, HEADURL, 
+      TIP, AreaID, CREATED_BY, 
+      CREATED_TIME, LAST_UPDATED_BY, LAST_UPDATED_TIME
+      )
+    values (#{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, 
+      #{email,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{headurl,jdbcType=VARCHAR}, 
+      #{tip,jdbcType=VARCHAR}, #{areaid,jdbcType=BIGINT}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=VARCHAR}, #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedTime,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.phoneBack.entity.UserDetail" >
+    update t_hg_user_detail
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=BIT},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headurl != null" >
+        HEADURL = #{headurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tip != null" >
+        TIP = #{tip,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        AreaID = #{areaid,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        LAST_UPDATED_TIME = #{lastUpdatedTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+      <!--分页查询,获取总记录条数 -->
+    <select id="getUserInfoTotalCount" resultType="int" parameterType="map">  
+       select count(sub.USER_ID) from  
+            ( SELECT USER_ID FROM t_hg_user_detail ud
+            where 1=1 
+            <!-- 名字 -->
+            <if test="name != null and name != ''">
+				and ud.NAME LIKE concat('%',#{name, jdbcType=VARCHAR},'%')
+			</if>
+			<!-- 昵称 -->
+			<if test="nickname != null and nickname != ''">
+				and ud.NICKNAME  LIKE concat('%',#{nickname, jdbcType=VARCHAR},'%')
+			</if>
+			<!-- email -->
+			<if test="email != null and email != ''">
+				and ud.EMAIL LIKE concat('%',#{email, jdbcType=VARCHAR},'%')
+			</if>
+                ) as sub  
+    </select> 
+    <!-- 对查询得到的数据进行分页 -->
+    <select id="getUserInfoByPager" resultMap="BaseResultMap" parameterType="map">  
+        select  sub.* 
+            from (
+             SELECT 
+             <include refid="Base_Column_List"></include>
+              FROM t_hg_user_detail ud
+            where 1=1 
+            <!-- 名字 -->
+            <if test="name != null and name != ''">
+				and ud.NAME LIKE concat('%',#{name, jdbcType=VARCHAR},'%')
+			</if>
+			<!-- 昵称 -->
+			<if test="nickname != null and nickname != ''">
+				and ud.NICKNAME  LIKE concat('%',#{nickname, jdbcType=VARCHAR},'%')
+			</if>
+			<!-- email -->
+			<if test="email != null and email != ''">
+				and ud.EMAIL LIKE concat('%',#{email, jdbcType=VARCHAR},'%')
+			</if>
+             	
+            ORDER BY ud.USER_ID DESC ) AS sub
+           <if test="startIndex != null and pageSize != null">
+           limit #{startIndex} , #{pageSize} 
+           </if>
+             
+    </select> 
+    <!-- 查找所用用户 -->
+    <select id="queryUserList" resultMap="BaseResultMap">
+        select * from t_hg_user_detail
+    </select>
+</mapper>

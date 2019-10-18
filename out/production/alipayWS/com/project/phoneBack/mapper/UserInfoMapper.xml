@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.project.phoneBack.entity.UserInfo" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+    <result column="USER_ACCOUNT" property="userAccount" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="BIT" />
+    <result column="REG_TYPE" property="regType" jdbcType="BIT" />
+    <result column="ENABLE" property="enable" jdbcType="BIT" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_TIME" property="lastUpdatedTime" jdbcType="VARCHAR" />
+    <result column="BANK_ACOUNT" property="bankAcount" jdbcType="DOUBLE" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, MOBILE, USER_PWD, USER_ACCOUNT, USER_TYPE, REG_TYPE, ENABLE, CREATED_BY, 
+    CREATED_TIME, LAST_UPDATED_BY, LAST_UPDATED_TIME,BANK_ACOUNT,version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hg_user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_hg_user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.project.phoneBack.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId" >
+     insert into t_hg_user (USER_ID, MOBILE, USER_PWD, 
+      USER_ACCOUNT, USER_TYPE, REG_TYPE, 
+      ENABLE, CREATED_BY, CREATED_TIME, 
+      LAST_UPDATED_BY, LAST_UPDATED_TIME,BANK_ACOUNT)
+    values (#{userId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{userAccount,jdbcType=VARCHAR}, #{userType,jdbcType=BIT}, #{regType,jdbcType=BIT}, 
+      #{enable,jdbcType=BIT}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedTime,jdbcType=VARCHAR},#{bankAcount,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.phoneBack.entity.UserInfo" >
+    update t_hg_user
+    <set >
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=BIT},
+      </if>
+      <if test="regType != null" >
+        REG_TYPE = #{regType,jdbcType=BIT},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=BIT},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        LAST_UPDATED_TIME = #{lastUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcount	 != null" >
+        BANK_ACOUNT = #{bankAcount,jdbcType=DOUBLE},
+      </if>
+      version=version+1
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+    and version= #{version,jdbcType=INTEGER} 
+  </update>
+</mapper>
