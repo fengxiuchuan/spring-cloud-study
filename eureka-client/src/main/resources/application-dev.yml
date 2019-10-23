@@ -1,6 +1,7 @@
 server:
   port: 2101
-
+  servlet:
+    context-path: /eureka-client
 # 日志配置
 logging:
   config: classpath:logback-spring.xml
@@ -8,6 +9,7 @@ logging:
 spring:
   application:
     name: eureka-client
+
 
 
 # eureka服务注册中心配置

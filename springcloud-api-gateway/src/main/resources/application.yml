@@ -1,9 +1,22 @@
+# 网关相关配置
 spring:
   application:
     name: cloud-gateway
   cloud:
     gateway:
-
+      routes:
+      - id: host_route
+        uri: http://localhost:2101
+        predicates:
+        - Path=/eureka-client/{segment}
+        filters:
+        - StripPrefix=1
+#服务端口号、应用名
 server:
   port: 11009
-
+  servlet:
+    context-path: cloud-gateway
+# 注册中心
+eureka:
+  client:
+    service-url: {"defaultZone":"http://localhost:11000/eureka/"}
