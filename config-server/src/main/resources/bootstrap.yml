@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      uri: http://localhost:2006
+    bus:
+      trace:
+        enabled: true
+      enabled: true
+
+  profiles:
+    active: dev
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 2006
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+eureka:
+  client:
+    service-url: {"defaultZone":"http://localhost:11000/eureka/"}

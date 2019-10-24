@@ -6,6 +6,14 @@ spring:
       uri: http://localhost:2006
   profiles:
     active: dev
+  rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
 server:
   port: 2007
 
+eureka:
+  client:
+    service-url: {"defaultZone":"http://localhost:11000/eureka/"}
